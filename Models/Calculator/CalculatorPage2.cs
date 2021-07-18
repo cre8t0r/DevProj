@@ -26,6 +26,7 @@ namespace DevelopmentProject.Models.Calculator
         [Required(ErrorMessage = "Valid value required for Monthly Expenses Total.")]
         public decimal MonthlyExpensesTotal { get; set; }
 
+        [Display(Name = "State")]
         //[StringLength(7, MinimumLength = 7)]
         //public string State { get; set; }
         public List<String> State
@@ -41,6 +42,7 @@ namespace DevelopmentProject.Models.Calculator
             }
         }
 
+        [Display(Name = "Postcode")]
         [Range(0200, 9999)]
         //[StringLength(4, MinimumLength = 4)]       
         //[RegularExpression(@"^[0-9]{4}$,")]

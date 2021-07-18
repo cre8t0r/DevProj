@@ -20,10 +20,11 @@ namespace DevelopmentProject.Models.Calculator
         public string Name { get; set; }
 
         //[StringLength(3, MinimumLength = 1)]
+        [Display(Name = "Age")]
         [RegularExpression(@"^[0-9]*$")]
         [Range(1, 150)]
         [Required(ErrorMessage = "Age must be a numerical value.")]
-        public int Age { get; set; }
+        public int? Age { get; set; }
         //public int Age 
         //{
         //    get

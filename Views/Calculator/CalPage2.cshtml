@@ -4,7 +4,7 @@
     ViewData["Title"] = "Calculator Page 2";
 }
 
-<h1>Calculator Page 2</h1>
+<h5>Calculator Page 2</h5>
 
 <div class="row">
     <div class="col-md-4">
@@ -44,7 +44,7 @@
                 @Html.HiddenFor(model => ViewData["CalculatorViewModel"])
             </div>
             <div>
-                <a asp-controller="Calculator" asp-action="CalPage1">Previous</a>
+                @*<a asp-controller="Calculator" asp-action="CalPage1">Previous</a>*@
 
                 <div class="form-group">
                     <input type="submit" value="Previous" class="btn btn-primary" asp-controller="Calculator" asp-action="Page1" />

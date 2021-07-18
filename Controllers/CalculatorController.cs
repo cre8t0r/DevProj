@@ -101,8 +101,16 @@ namespace DevelopmentProject.Controllers
                                         where rf.Rating == viewModel.CalculatorPage2.Occupation
                                         select rf.Factor).FirstOrDefault();
 
+                int age = 0;
+                if (viewModel.CalculatorPage1.Age != null)
+                {
+                    // Get integer value from nullable Age object
+                    age = viewModel.CalculatorPage1.Age.GetValueOrDefault();
+                }                
+                
+
                 // Total Value = (Sum Insured * Occupation Rating Factor) / (100 * 12 * Age)
-                decimal totalValue = (viewModel.CalculatorPage2.SumInsured * ratingFactor) / (100 * 12 * viewModel.CalculatorPage1.Age);
+                decimal totalValue = (viewModel.CalculatorPage2.SumInsured * ratingFactor) / (100 * 12 * age);
 
                 ViewBag.TotalValue = totalValue;
             }
