@@ -1,0 +1,65 @@
+﻿@model DevelopmentProject.Models.Calculator.CalculatorViewModel
+
+@{
+    ViewData["Title"] = "Calculator Page 2";
+}
+
+<h1>Calculator Page 2</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Calculator" asp-action="Calculate">
+            <div class="form-group">
+                <label asp-for="CalculatorPage2.Occupation" class="control-label"></label>
+                @*<input asp-for="Occupation" class="form-control" />
+                    <span asp-validation-for="Occupation" class="text-danger"></span>*@
+                <select asp-for="CalculatorPage2.Occupation" asp-validation-for="Occupation" class="form-control" asp-items="@(new SelectList(@ViewBag.OccupationRatings,"Rating","Occupation"))"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CalculatorPage2.SumInsured" class="control-label"></label>
+                <input asp-for="CalculatorPage2.SumInsured" class="form-control" />
+                <span asp-validation-for="CalculatorPage2.SumInsured" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CalculatorPage2.MonthlyExpensesTotal" class="control-label"></label>
+                <input asp-for="CalculatorPage2.MonthlyExpensesTotal" class="form-control" />
+                <span asp-validation-for="CalculatorPage2.MonthlyExpensesTotal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CalculatorPage2.State" class="control-label"></label>                
+                <span asp-validation-for="CalculatorPage2.State" class="text-danger"></span>
+                @Html.DropDownList("States", new List<SelectListItem>
+                {
+                    new SelectListItem{ Text="State 1", Value = "1" },
+                    new SelectListItem{ Text="State 2", Value = "2" }
+                 }, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CalculatorPage2.State, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label asp-for="CalculatorPage2.Postcode" class="control-label"></label>
+                <input asp-for="CalculatorPage2.Postcode" class="form-control" />
+                <span asp-validation-for="CalculatorPage2.Postcode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.HiddenFor(model => ViewData["CalculatorViewModel"])
+            </div>
+            <div>
+                <a asp-controller="Calculator" asp-action="CalPage1">Previous</a>
+
+                <div class="form-group">
+                    <input type="submit" value="Previous" class="btn btn-primary" asp-controller="Calculator" asp-action="Page1" />
+                    <input type="submit" value="Calculate" class="btn btn-primary" />
+                </div>
+
+                <label class="control-label">Total Value</label>
+                @ViewBag.TotalValue
+                @*<label asp-for="TotalValue" class="control-label"></label>*@
+            </div>
+            @Html.HiddenFor(model => model.CalculatorPage1.Name)
+            @Html.HiddenFor(model => model.CalculatorPage1.Age)
+            @Html.HiddenFor(model => model.CalculatorPage1.DateOfBirth)
+        </form>
+    </div>
+</div>
+
+
