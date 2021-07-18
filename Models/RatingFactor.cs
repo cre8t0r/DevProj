@@ -12,11 +12,11 @@ namespace DevelopmentProject.Models
         public int Id { get; set; }
 
         [StringLength(100, MinimumLength = 5)]
-        [Required]
+        [Required(ErrorMessage = "Rating is required.")]
         public string Rating { get; set; }
 
         [Column(TypeName = "decimal(18, 2)")]
-        [Required]
+        [Required(ErrorMessage = "Factor is required.")]
         public decimal Factor { get; set; }
     }
 }

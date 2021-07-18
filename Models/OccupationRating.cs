@@ -11,11 +11,11 @@ namespace DevelopmentProject.Models
         public int Id { get; set; }
 
         [StringLength(100, MinimumLength = 5)]
-        [Required]
+        [Required(ErrorMessage = "Occupation is required.")]
         public string Occupation { get; set; }
 
         [StringLength(100, MinimumLength = 5)]
-        [Required]
+        [Required(ErrorMessage = "Rating is required.")]
         public string Rating { get; set; }
     }
 }
