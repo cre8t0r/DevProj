@@ -36,7 +36,7 @@ namespace DevelopmentProject.Models.Calculator
         [Required(ErrorMessage = "Postcode needs to be 4 digits (0200 to 9999).")]
         public int? Postcode { get; set; }
 
-        //[Display(Name = "Total Value")]
-        //public decimal TotalValue { get; set; }
+        [Display(Name = "Total Value")]
+        public decimal? TotalValue { get; set; }
     }
 }

@@ -71,6 +71,16 @@ namespace DevelopmentProject.Models.Calculator
         //        _dob = value;
         //    }
         //}
-        #endregion 
+        #endregion
+
+        // These properties are to be used for Page 2
+        #region To be used for Page 2         
+        public String Occupation { get; set; }
+        public decimal? SumInsured { get; set; }
+        public decimal? MonthlyExpensesTotal { get; set; }
+        public String State { get; set; }
+        public int? Postcode { get; set; }
+        public decimal? TotalValue { get; set; }
+        #endregion #region To be used for Page 2
     }
 }

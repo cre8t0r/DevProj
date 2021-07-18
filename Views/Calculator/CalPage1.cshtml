@@ -7,7 +7,7 @@
 <h5>Calculator Page 1</h5>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-8">
         <form asp-controller="Calculator" asp-action="Page2">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*<input type="hidden" asp-for="CalculatorPage1.Id" />*@
@@ -33,6 +33,13 @@
             <div class="form-group">
                 <input type="submit" value="Next" class="btn btn-primary" />
             </div>
+
+            @Html.HiddenFor(model => model.CalculatorPage1.Occupation)
+            @Html.HiddenFor(model => model.CalculatorPage1.SumInsured)
+            @Html.HiddenFor(model => model.CalculatorPage1.MonthlyExpensesTotal)
+            @Html.HiddenFor(model => model.CalculatorPage1.State)
+            @Html.HiddenFor(model => model.CalculatorPage1.Postcode)
+            @Html.HiddenFor(model => model.CalculatorPage1.TotalValue)
         </form>
     </div>
 </div>
