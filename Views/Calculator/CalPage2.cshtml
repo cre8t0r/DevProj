@@ -30,11 +30,11 @@
             <div class="form-group">
                 <label asp-for="CalculatorPage2.State" class="control-label"></label>                
                 <span asp-validation-for="CalculatorPage2.State" class="text-danger"></span>
-                @Html.DropDownList("States", new List<SelectListItem>
+                @Html.DropDownListFor(m => m.CalculatorPage2.State, new List<SelectListItem>
                 {
-                    new SelectListItem{ Text="State 1", Value = "1" },
-                    new SelectListItem{ Text="State 2", Value = "2" }
-                 }, new { @class = "form-control" })
+                    new SelectListItem{ Text="State 1", Value = "State 1" },
+                    new SelectListItem{ Text="State 2", Value = "State 2" }
+                }, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CalculatorPage2.State, "", new { @class = "text-danger" })
             </div>
             <div class="form-group">

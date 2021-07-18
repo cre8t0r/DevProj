@@ -106,11 +106,16 @@ namespace DevelopmentProject.Controllers
                 {
                     // Get integer value from nullable Age object
                     age = viewModel.CalculatorPage1.Age.GetValueOrDefault();
-                }                
-                
+                }
+
+                decimal sumInsured = 0;
+                if (viewModel.CalculatorPage2.SumInsured != null)
+                {
+                    sumInsured = viewModel.CalculatorPage2.SumInsured.GetValueOrDefault(); 
+                }
 
                 // Total Value = (Sum Insured * Occupation Rating Factor) / (100 * 12 * Age)
-                decimal totalValue = (viewModel.CalculatorPage2.SumInsured * ratingFactor) / (100 * 12 * age);
+                decimal totalValue = (sumInsured * ratingFactor) / (100 * 12 * age);
 
                 ViewBag.TotalValue = totalValue;
             }
