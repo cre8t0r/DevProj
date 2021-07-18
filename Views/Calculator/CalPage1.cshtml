@@ -18,7 +18,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="CalculatorPage1.Age" class="control-label"></label>
-                <input asp-for="CalculatorPage1.Age" class="form-control" />
+                @*<input asp-for="CalculatorPage1.Age" class="form-control" />*@
+                @Html.TextBoxFor(m => m.CalculatorPage1.Age, "", new { maxlength = 3, @class = "form-control" })
                 <span asp-validation-for="CalculatorPage1.Age" class="text-danger"></span>
             </div>
             <div class="form-group">
