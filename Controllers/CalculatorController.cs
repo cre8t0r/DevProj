@@ -251,44 +251,5 @@ namespace DevelopmentProject.Controllers
 
             return occupationRatings;
         }
-
-        ///// <summary>
-        ///// Load the occupation rating list for the dropdown
-        ///// </summary>
-        ////private void LoadOccpationRatingList(CalculatorViewModel calculatorViewModel)
-        //private void LoadOccupationRatingList()
-        //{
-        //    CalculatorViewModel viewModel = new CalculatorViewModel();
-        //    viewModel = GetCalculatorViewModel();
-
-        //    List<OccupationRating> occupationRatings = new List<OccupationRating>();
-        //    occupationRatings = this.GetOccpationRatingList();
-
-        //    // TODO: For future use
-        //    //occupationRatings.Insert(0, new OccupationRating { Occupation = "- Select -", Rating = "" });
-
-        //    viewModel.OccupationRatings = new List<OccupationRating>();
-        //    viewModel.OccupationRatings = occupationRatings;
-
-
-        //    ViewBag.OccupationRatings = viewModel.OccupationRatings;
-        //}
-
-        //// Get CalculatorViewModel from ViewData object
-        ////private CalculatorViewModel GetCalculatorViewModel(CalculatorViewModel calculatorViewModel)
-        //private CalculatorViewModel GetCalculatorViewModel()
-        //{
-        //    CalculatorViewModel viewModel = new CalculatorViewModel();
-
-        //    if (ViewData["CalculatorViewModel"] != null)
-        //    {
-        //        if (ViewData["CalculatorViewModel"] is CalculatorViewModel)
-        //        {
-        //            viewModel = (CalculatorViewModel)ViewData["CalculatorViewModel"];
-        //        }
-        //    }
-
-        //    return viewModel;
-        //}
     }
 }
