@@ -117,7 +117,10 @@ namespace DevelopmentProject.Controllers
                 Int32.TryParse(viewModel.CalculatorPage1.Age.GetValueOrDefault().ToString(), out age);
             }
 
-            DateTime.TryParse(viewModel.CalculatorPage1.DateOfBirth.ToString(), out dateOfBirth);
+            if (viewModel.CalculatorPage1.DateOfBirth != null)
+            {
+                DateTime.TryParse(viewModel.CalculatorPage1.DateOfBirth.ToString(), out dateOfBirth);
+            }            
             expectedDateOfBirth = DateTime.Now.AddYears(-age);
 
             // Check to see if the year of DOB entered is same as the year expected based on the age.
