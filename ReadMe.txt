@@ -3,3 +3,10 @@
 2. It is assumed that customer details (name, age, date of birth, etc.) are not required to be saved/stored in a database. 
 3. It is assumed that OccupationRatings and RatingFactors need to be stored in database so that they could be changed from time to time. 
 
+Clarifications: 
+Following items could be improved if I could spend another day on this prototype: 
+1. Validation
+2. Unit testing - There was an issue with my Visual Studio today (18/7/21) when trying to add the unit test project. 
+3. Presentation (UI) 
+4. Documentation
+5. Comments
