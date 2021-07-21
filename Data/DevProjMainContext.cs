@@ -14,8 +14,10 @@ namespace DevelopmentProject.Data
         {
         }
 
+        public DbSet<DevelopmentProject.Models.Customer> Customer { get; set; }
+
         public DbSet<DevelopmentProject.Models.OccupationRating> OccupationRating { get; set; }
 
-        public DbSet<DevelopmentProject.Models.RatingFactor> RatingFactor { get; set; }
+        public DbSet<DevelopmentProject.Models.RatingFactor> RatingFactor { get; set; }        
     }
 }

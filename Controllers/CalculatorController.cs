@@ -13,6 +13,7 @@ namespace DevelopmentProject.Controllers
     public class CalculatorController : Controller
     {
         private readonly DevProjMainContext _context;
+        private readonly ICustomerRepository _customerRepository;
 
         public CalculatorController(DevProjMainContext context)
         {
@@ -24,18 +25,96 @@ namespace DevelopmentProject.Controllers
             return View();
         }
 
+		//[HttpGet]
+		//// POST: Calculator/CalPage1        
+		//public IActionResult Page1()
+		//{
+		//	return View("CalPage1");
+		//}
+
         [HttpGet]
-        // POST: Calculator/CalPage1        
-        public IActionResult Page1()
+        public IActionResult Page1(int customerID)
         {
-            return View("CalPage1");
+            if (customerID > 0)
+            {
+                var customer = _context.Customer.FirstOrDefault(m => m.Id == customerID);
+                if (customer == null)
+                {
+                    return NotFound();
+                }
+
+                CalculatorViewModel calViewModel = new CalculatorViewModel();
+                calViewModel.CalculatorPage1 = new CalculatorPage1() { Name = customer.Name, Age = customer.Age, DateOfBirth = customer.DateOfBirth.ToString("dd/MM/yyyy") };
+                //calViewModel.CalculatorPage1.Name = customer.Name;
+                //calViewModel.CalculatorPage1.Age = customer.Age;
+                //calViewModel.CalculatorPage1.DateOfBirth = customer.DateOfBirth.ToString("dd/MM/yyyy");
+
+                calViewModel.CalculatorPage2 = new CalculatorPage2()
+                {
+                    Occupation = customer.Occupation,
+                    SumInsured = customer.SumInsured,
+                    MonthlyExpensesTotal = customer.MonthlyExpensesTotal,
+                    State = customer.State,
+                    Postcode = customer.Postcode
+                };
+                //calViewModel.CalculatorPage2.Occupation = customer.Occupation;
+                //calViewModel.CalculatorPage2.SumInsured = customer.SumInsured;
+                //calViewModel.CalculatorPage2.MonthlyExpensesTotal = customer.MonthlyExpensesTotal;
+                //calViewModel.CalculatorPage2.State = customer.State;
+                //calViewModel.CalculatorPage2.Postcode = customer.Postcode;
+
+                return View("CalPage1", calViewModel);
+            }
+            else 
+            {
+                return View("CalPage1");
+            }          
         }
+
+        //[HttpGet]
+        //// POST: Calculator/CalPage2       
+        //public IActionResult Page2()
+        //{
+        //    return View("CalPage2");
+        //}
 
         [HttpGet]
         // POST: Calculator/CalPage2       
-        public IActionResult Page2()
+        public IActionResult Page2(int customerID)
         {
-            return View("CalPage2");
+            if (customerID > 0)
+            {
+                var customer = _context.Customer.FirstOrDefault(m => m.Id == customerID);
+                if (customer == null)
+                {
+                    return NotFound();
+                }
+
+                CalculatorViewModel calViewModel = new CalculatorViewModel();
+                calViewModel.CalculatorPage1 = new CalculatorPage1() { Name = customer.Name, Age = customer.Age, DateOfBirth = customer.DateOfBirth.ToString("dd/MM/yyyy") };
+
+                var occupationRating = _context.OccupationRating.FirstOrDefault(m => m.Rating == customer.Occupation);
+
+                calViewModel.CalculatorPage2 = new CalculatorPage2()
+                {
+                    Occupation = occupationRating.Occupation,
+                    SumInsured = customer.SumInsured,
+                    MonthlyExpensesTotal = customer.MonthlyExpensesTotal,
+                    State = customer.State,
+                    Postcode = customer.Postcode
+                };
+
+                List<OccupationRating> occupationRatings = new List<OccupationRating>();
+                occupationRatings = GetOccpationRatingList();
+                calViewModel.OccupationRatings = occupationRatings;
+                ViewBag.OccupationRatings = occupationRatings;
+
+                return View("CalPage2", calViewModel);
+            }
+            else
+            {
+                return View("CalPage2");
+            }            
         }
 
         /// <summary>
@@ -187,10 +266,7 @@ namespace DevelopmentProject.Controllers
                 #endregion This logic is to retain the values from Page 1
 
                 ViewData["CalculatorViewModel"] = viewModel;
-                //TempData["CalculatorViewModel"] = viewModel;
-
-                //return View("CalPage2", viewModel);
-                //return RedirectToAction("CalPage2");
+                
                 return View("CalPage2", viewModel);
             }
             else
@@ -211,6 +287,28 @@ namespace DevelopmentProject.Controllers
             if (ModelState.IsValid)
             {
                 Customer customer1 = (Customer)TempData["Customer"];
+
+                #region Save Customer (For future use)
+
+                Customer customer = new Customer();
+
+                DateTime dob = new DateTime();
+                DateTime.TryParse(viewModel.CalculatorPage1.DateOfBirth.ToString(), out dob);
+
+                customer.Name = viewModel.CalculatorPage1.Name;
+                customer.Age = viewModel.CalculatorPage1.Age.GetValueOrDefault();
+                customer.DateOfBirth = dob;
+                customer.Occupation = viewModel.CalculatorPage2.Occupation;
+                customer.SumInsured = viewModel.CalculatorPage2.SumInsured.GetValueOrDefault();
+                customer.MonthlyExpensesTotal = viewModel.CalculatorPage2.MonthlyExpensesTotal.GetValueOrDefault();
+                customer.State = viewModel.CalculatorPage2.State;
+                customer.Postcode = viewModel.CalculatorPage2.Postcode.GetValueOrDefault();
+
+                // Save customer details in the database
+                _context.Customer.Add(customer);
+                _context.SaveChanges();                
+
+                #endregion Save Customer (For future use)
 
                 // Get the factor from Rating Factor table using Occupation selected by user on Page 2
                 List<RatingFactor> ratinFactor = new List<RatingFactor>();
@@ -241,8 +339,7 @@ namespace DevelopmentProject.Controllers
             occupationRatings = GetOccpationRatingList();
             viewModel.OccupationRatings = occupationRatings;
             ViewBag.OccupationRatings = occupationRatings;
-
-            //return View(viewModel);
+            
             return View("CalPage2", viewModel);
         }
 
