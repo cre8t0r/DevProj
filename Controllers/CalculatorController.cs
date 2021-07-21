@@ -28,18 +28,17 @@ namespace DevelopmentProject.Controllers
             return View();
         }
 
-		//[HttpGet]
-		//// POST: Calculator/CalPage1        
-		//public IActionResult Page1()
-		//{
-		//	return View("CalPage1");
-		//}
-
+        /// <summary>
+        /// First page of the calculator
+        /// </summary>
+        /// <param name="customerID"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Page1(int customerID)
         {
             if (customerID > 0)
             {
+                // If the customer ID is passed in, use it to retrieve the customer information
                 var customer = _context.Customer.FirstOrDefault(m => m.Id == customerID);
                 if (customer == null)
                 {
