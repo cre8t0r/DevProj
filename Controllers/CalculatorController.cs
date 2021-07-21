@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
 using DevelopmentProject.Data;
 using DevelopmentProject.Models;
 using DevelopmentProject.Models.Calculator;
+using DevelopmentProject.BusinessLogic;
 
 namespace DevelopmentProject.Controllers
 {
@@ -316,21 +319,8 @@ namespace DevelopmentProject.Controllers
                                         where rf.Rating == viewModel.CalculatorPage2.Occupation
                                         select rf.Factor).FirstOrDefault();
 
-                int age = 0;
-                if (viewModel.CalculatorPage1.Age != null)
-                {
-                    // Get integer value from nullable Age object
-                    age = viewModel.CalculatorPage1.Age.GetValueOrDefault();
-                }
-
-                decimal sumInsured = 0;
-                if (viewModel.CalculatorPage2.SumInsured != null)
-                {
-                    sumInsured = viewModel.CalculatorPage2.SumInsured.GetValueOrDefault(); 
-                }
-
-                // Total Value = (Sum Insured * Occupation Rating Factor) / (100 * 12 * Age)
-                decimal totalValue = (sumInsured * ratingFactor) / (100 * 12 * age);
+                // Calculate Total Value (Total Value = (Sum Insured * Occupation Rating Factor) / (100 * 12 * Age))
+                decimal totalValue = CalculationLogic.CalculateTotalValue(customer: customer, ratingFactor: ratingFactor);
 
                 ViewBag.TotalValue = totalValue;
             }
